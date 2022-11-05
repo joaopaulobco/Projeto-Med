@@ -10,7 +10,7 @@ const User = require('../models/User.model');
 const SALT_ROUNDS = 10;
 
 // rotas de autenticação
-router.post('/', async (req, res, next)  => {
+router.post('/signin', async (req, res, next)  => {
     console.log(req.body)
     const { username, email, password} = req.body;
   try {
@@ -43,6 +43,47 @@ router.post('/', async (req, res, next)  => {
     next(error);
   }
 });
+
+router.post('/login', async (req, res, next) => {
+  const { email, password} = req.body;
+  try {
+    if(!email || !password) {
+      return res.status(400).json('Email e senha obrigatórios.')
+    }
+
+    const userFromDB = await User.findOne({ email });
+
+    if(!userFromDB) {
+      return res.status(401).json('Usuário ou senha não encontrados.')
+    }
+
+    const verify = bcrypt.compareSync(password, userFromDB.password);
+
+    const payload = {
+      _id: userFromDB._id,
+      username: userFromDB.username,
+      email: userFromDB.email,
+    }
+
+    const token = jwt.sign(
+      payload,
+      process.env.JWT_SECRET,
+      {
+        algorithm: 'HS256',
+        expiresIn: '6h'
+      }
+    )
+
+    res.status(200).json({token});
+
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/verify', isAuthenticated, (req, res, next) => {
+  res.status(200).json(req.payload);
+})
 
 
 

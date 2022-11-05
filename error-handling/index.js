@@ -12,7 +12,7 @@ const handleError = (app) => {
   
       // só enviamos a resposta se já não tiver sido enviada antes.
       if(!res.headersSent) {
-        req.status(500).json({
+        res.status(500).json({
           message: error.message || 'Erro interno no servidor',
           error
         });

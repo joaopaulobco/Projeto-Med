@@ -7,7 +7,7 @@ require('./db');
 // configurações
 require('./configs')(app);
 // rotas
-
+app.use('/auth', require('./routes/auth.routes'));
 // erros
 
 app.use((req, res, next) => {

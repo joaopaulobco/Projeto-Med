@@ -9,7 +9,7 @@ const User = require('../models/User.model');
 const SALT_ROUNDS = 10;
 
 // rotas de autenticação
-router.post('/signin', async (req, res, next)  => {
+router.post('/signup', async (req, res, next)  => {
     console.log(req.body)
     const { username, email, password} = req.body;
   try {

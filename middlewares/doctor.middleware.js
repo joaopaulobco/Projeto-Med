@@ -1,14 +1,13 @@
-const Doctor = require('../models/Doctor.model')
+const Doctor = require("../models/Doctor.model");
 
-function isDoctor (req, res, next) {
-console.log('Estou no middleware')
-console.log(req.payload)
+async function isDoctor(req, res, next) {
+  const userId = req.payload._id;
+  const doctorFromDB = await Doctor.findOne({ _id: userId });
 
-    req.goiaba = 'goiaba'
-    // if (req.user.role === 'doctor') next();
-    //  res.status(401).json('Nao é um médico');
-    next()
+  if (!doctorFromDB) {
+    return res.status(401).json("Usuário não autorizado.");
   }
+  next();
+}
 
-
-  module.exports = isDoctor;
+module.exports = isDoctor;

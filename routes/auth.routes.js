@@ -58,6 +58,10 @@ router.post('/login', async (req, res, next) => {
 
     const verify = bcrypt.compareSync(password, userFromDB.password);
 
+    if(!verify) {
+      res.status(403).json('Usuário ou senha incorretos.')
+    }
+
     const payload = {
       _id: userFromDB._id,
       username: userFromDB.username,

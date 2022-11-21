@@ -19,6 +19,12 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: [true, 'password obrigatório']
+  },
+
+  role: {
+    type: String,
+    required: [true, 'role obrigatória'],
+    enum: ['user', 'doctor']
   }
   
 },{ timestamps: true });

@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
-const doctorSchema = new Schema({
-  username: {
+const anamneseSchema = new Schema({
+  genre: {
     type: String,
     trim: true,
     required: [ true, 'username obrigatório'],
@@ -19,8 +19,14 @@ const doctorSchema = new Schema({
   password: {
     type: String,
     required: [true, 'password obrigatório']
+  },
+
+  role: {
+    type: String,
+    required: [true, 'role obrigatória'],
+    enum: ['user', 'doctor']
   }
   
 },{ timestamps: true });
 
-module.exports = model('Doctor', doctorSchema);
+module.exports = model('User', userSchema);

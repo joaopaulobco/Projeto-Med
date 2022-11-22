@@ -10,6 +10,7 @@ require('./db');
 require('./configs')(app);
 // rotas
 app.use('/auth', require('./routes/auth.routes'));
+app.use('/anamnese', require('./routes/anamnese.routes'));
 // erros
 
 app.use((req, res, next) => {

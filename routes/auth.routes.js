@@ -9,10 +9,10 @@ const User = require('../models/User.model');
 const SALT_ROUNDS = 10;
 
 // rotas de autenticação
-router.post('/signup/:role', async (req, res, next)  => {
+router.post('/signup', async (req, res, next)  => {
     console.log(req.body)
-    const { username, email, password} = req.body;
-    const {role} = req.params
+    const { username, email, password, role = 'user'} = req.body;
+    
   try {
     if(!username || !email || !password) {
         const error = new Error('Campos de login obrigatórios');
@@ -36,6 +36,7 @@ router.post('/signup/:role', async (req, res, next)  => {
       password: hash,
       role
     });
+
 
     res.status(201).json(userFromDB);
     

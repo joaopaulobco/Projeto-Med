@@ -81,4 +81,4 @@ const anamneseSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = model("User", userSchema);
+module.exports = model("Anamnese", anamneseSchema);

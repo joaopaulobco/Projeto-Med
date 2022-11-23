@@ -1,24 +1,21 @@
-require('dotenv/config'); // permite acesso ao arquivo .env
-const express = require('express');
+require("dotenv/config"); // permite acesso ao arquivo .env
+const express = require("express");
 const app = express();
 
-const { isAuthenticated } = require('./middlewares/jwt.middleware');
+const { isAuthenticated } = require("./middlewares/jwt.middleware");
 
 // banco de dados
-require('./db');
+require("./db");
+
 // configurações
-require('./configs')(app);
+require("./configs")(app);
+
 // rotas
-app.use('/auth', require('./routes/auth.routes'));
-app.use('/anamnese', require('./routes/anamnese.routes'));
+app.use("/auth", require("./routes/auth.routes"));
+app.use("/anamnese", isAuthenticated, require("./routes/anamnese.routes"));
+
 // erros
-
-app.use((req, res, next) => {
-  res.status(404).json('Não encontrado!');
-});
-
-
-require('./error-handling')(app); // importamos e executamos a função já executando ela.
+require("./error-handling")(app); // importamos e executamos a função já executando ela.
 
 // exportar app
 module.exports = app;

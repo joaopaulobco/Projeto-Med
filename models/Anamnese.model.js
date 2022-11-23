@@ -2,14 +2,18 @@ const { Schema, model } = require("mongoose");
 
 const anamneseSchema = new Schema(
   {
-    genre: {
+    patientId:{
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    gender: {
       type: String,
-      required: [true, "Gênero obrigatório"],
-      unique: true,
+      required: [true, "Gênero obrigatório"]
     },
 
     weight: {
       type: Number,
+      required: true
     },
 
     height: {

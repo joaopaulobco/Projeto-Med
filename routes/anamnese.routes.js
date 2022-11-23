@@ -1,9 +1,9 @@
 const router = require("express").Router();
 
+const { isAuthenticated } = require("../middlewares/jwt.middleware");
 const Anamnese = require("../models/Anamnese.model");
-const { isDoctor } = require("../middlewares/roles.middleware");
 
-router.post("/", async (req, res, next) => {
+router.post("/", isAuthenticated, async (req, res, next) => {
   req.body.patientId = req.payload._id;
   try {
     await Anamnese.create(req.body);

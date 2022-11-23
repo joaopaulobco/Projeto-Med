@@ -13,6 +13,7 @@ require("./configs")(app);
 // rotas
 app.use("/auth", require("./routes/auth.routes"));
 app.use("/anamnese", isAuthenticated, require("./routes/anamnese.routes"));
+app.use("/acompanhamento", isAuthenticated, require("./routes/acompanhamento.routes"));
 
 // erros
 require("./error-handling")(app); // importamos e executamos a função já executando ela.

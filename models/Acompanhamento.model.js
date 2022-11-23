@@ -2,6 +2,11 @@ const { Schema, model } = require('mongoose');
 
 const acompanhamentoSchema = new Schema({
 
+    patientId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+
     weight:{
         type: Number
     },

@@ -41,10 +41,6 @@ const anamneseSchema = new Schema(
       type: Boolean,
     },
 
-    drugDoses: {
-      type: Number,
-    },
-
     hereditaryDisease: {
       type: String,
     },
@@ -75,9 +71,7 @@ const anamneseSchema = new Schema(
       type: Boolean,
     },
 
-    whatSurgery: {
-      type: String,
-    },
+    
   },
   { timestamps: true }
 );

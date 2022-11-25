@@ -1,7 +1,7 @@
 const handleError = (app) => {
     // este middleware executa quando uma requisição não for disponível.
     app.use((req, res, next) => {
-      req.status(404).json('Não encontrado!');
+      res.status(404).json('Não encontrado!');
     })
   
     // este middleware executa quando chamamos next(error) nas rotas anteriores.

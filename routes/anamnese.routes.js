@@ -38,7 +38,7 @@ const getAnamneses = async (req, res, next) => {
     }
 
     if ((queryParams.userId || queryParams.name) && !isDoctor) {
-      throw new Error("Um usúario comum não pode filtrar por userid ou name");
+      throw new Error("Um usúario comum não pode filtrar por id de usúario ou nome");
     }
 
     if (isDoctor && queryParams.name) {
@@ -65,5 +65,30 @@ const getAnamneses = async (req, res, next) => {
 
 router.get("/", getAnamneses);
 
+router.put("/:anamneseId", async (req, res, next) => {
+  try {
+    const anamneseFromDb = await Anamnese.findByIdAndUpdate(
+      req.params.anamneseId,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(anamneseFromDb);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/:anamneseDelete", async (req, res, next) => {
+
+  try {
+    const deleteAnamnese = await Anamnese.findByIdAndDelete(
+      req.params.anamneseDelete,
+      req.body
+    );
+    res.status(200).json(deleteAnamnese);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-
+//TODO ADICIONAR GENDER
 const userSchema = new Schema({
   username: {
     type: String,

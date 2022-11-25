@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const anamneseSchema = new Schema(
+  //TODO TROCAR PARA userId, tirar gender
   {
     patientId:{
       type: Schema.Types.ObjectId,

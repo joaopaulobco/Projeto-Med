@@ -41,10 +41,6 @@ const anamneseSchema = new Schema(
       type: Boolean,
     },
 
-    whatMedications: {
-      type: String,
-    },
-
     drugDoses: {
       type: Number,
     },

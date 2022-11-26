@@ -3,8 +3,9 @@ const { Schema, model } = require('mongoose');
 const acompanhamentoSchema = new Schema({
     // anamneseId: {
     //     type: Schema.Types.ObjectId,
-            // ref:'Anamnese'
-    // }
+    //         ref:'Acompanhamento'
+    // },
+
     patientId: {
         type: Schema.Types.ObjectId,
         ref: 'User'

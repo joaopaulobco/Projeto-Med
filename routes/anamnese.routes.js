@@ -92,12 +92,24 @@ const updateAnamneses = async (req, res, next) => {
 };
 
 const deleteAnamneses = async (req, res, next) => {
+  const userId = req.payload._id;
+  const isDoctor = req.payload.role === 'doctor'
   try {
+    const anamnese = await Anamnese.findOne({_id: req.params.anamneseId})
+
+    if(!anamnese){
+      res.status(404).json({message: 'Anamnese não encontrada'})
+    }
+
+    if(userId !== anamnese.patientId.toString() && !isDoctor){
+      throw new Error("Ação não autorizada")
+    }
+
     const deletedAnamnese = await Anamnese.findByIdAndDelete(
       req.params.anamneseId,
       req.body
     );
-    res.status(204).end();
+    res.status(200).json({message: 'Anamnese deletada'});
   } catch (error) {
     next(error);
   }

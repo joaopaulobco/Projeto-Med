@@ -41,6 +41,14 @@ const getAcompanhamentos = async (req, res, next) => {
       );
     }
 
+    if(isDoctor && !queryParams.name && !queryParams.userId ) {
+      
+      const allUsers = await Acompanhamento.find();
+      res.status(200).json(allUsers);
+      console.log(allUsers)
+      return
+    }
+
     if (isDoctor && queryParams.name) {
       const regex = new RegExp(queryParams.name, "i");
       const users = await User.find({ username: regex });
@@ -51,6 +59,8 @@ const getAcompanhamentos = async (req, res, next) => {
       res.status(200).json(acompanhamentos);
       return;
     }
+
+    
 
     const dbQuery = isDoctor
       ? { patientId: queryParams.userId }

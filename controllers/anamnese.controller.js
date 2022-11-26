@@ -70,7 +70,6 @@ const updateAnamneses = async (req, res, next) => {
     if (!anamnese) {
       res.status(404).json({ message: "Anamnese não encontrada" });
     }
-
     if (userId !== anamnese.patientId.toString() && !isDoctor) {
       throw new Error("O id do usuário não corresponde ao id da anamnese ");
     }

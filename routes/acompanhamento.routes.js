@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const router = Router();
+const User = require('../models/User.model')
 
 const Acompanhamento = require("../models/Acompanhamento.model");
 
